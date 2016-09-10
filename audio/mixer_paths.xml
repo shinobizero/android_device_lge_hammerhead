@@ -503,8 +503,8 @@
         <ctl name="RX1 Digital Volume" value="84" />
         <ctl name="RX2 Digital Volume" value="84" />
         <!-- you may want to lower HPHL[R] Volume from 15 to 10 to significantly reduce nonlinear distortion (THD) in the left channel (hardware problem!) -->
-        <ctl name="HPHL Volume" value="17" />
-        <ctl name="HPHR Volume" value="17" />
+        <ctl name="HPHL Volume" value="20" />
+        <ctl name="HPHR Volume" value="20" />
         <!-- <ctl name="COMP1 Switch" value="1" /> -->
     </path>
 

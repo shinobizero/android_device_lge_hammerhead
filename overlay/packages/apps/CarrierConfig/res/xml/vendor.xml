@@ -1,6 +1,14 @@
 <?xml version='1.0' encoding='utf-8' standalone='yes' ?>
 <carrier_config_list>
-<carrier_config mcc="440" mnc="20">
-<boolean name="config_cellBroadcastAppLinks" value="false" />
-</carrier_config>
+    <carrier_config mcc="440" mnc="20">
+        <boolean name="config_cellBroadcastAppLinks" value="false" />
+    </carrier_config>
+    <carrier_config>
+        <boolean name="config_enable_mms_with_mobile_data_off" value="true" />
+    </carrier_config>
+    <carrier_config>
+	<int name="maxImageHeight" value="1944" />
+	<int name="maxMessageSize" value="307200" />
+	<int name="maxImageWidth" value="2592" />
+    </carrier_config>
 </carrier_config_list>

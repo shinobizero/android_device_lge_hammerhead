@@ -59,9 +59,11 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 # Display
 PRODUCT_PACKAGES += \
     gralloc.msm8974 \
+    libgenlock \
     hwcomposer.msm8974 \
     memtrack.msm8974 \
-    liboverlay
+    libqdutils \
+    libqdMetaData
 
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi

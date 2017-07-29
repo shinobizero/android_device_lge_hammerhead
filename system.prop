@@ -4,8 +4,12 @@ ro.product.first_api_level=19
 # Audio
 media.aac_51_output_enabled=true
 ro.qc.sdk.audio.fluencetype=fluence
+persist.audio.handset.mic.type=digital
+persist.audio.dualmic.config=endfire
 persist.audio.fluence.voicecall=true
-persist.audio.fluence.audiorec=true
+persist.audio.fluence.voicecomm=true
+persist.audio.fluence.voicerec=false
+persist.audio.fluence.speaker=false
 af.fast_track_multiplier=1
 audio_hal.period_size=192
 
@@ -44,9 +48,6 @@ ro.input.noresample=1
 
 # Net
 net.tethering.noprovisioning=true
-
-# Perf
-ro.vendor.extension_library=libqti-perfd-client.so
 
 # QCOM
 drm.service.enabled=true

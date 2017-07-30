@@ -59,9 +59,11 @@ $(call inherit-product, frameworks/native/build/phone-xhdpi-2048-dalvik-heap.mk)
 # Display
 PRODUCT_PACKAGES += \
     gralloc.msm8974 \
+    libgenlock \
     hwcomposer.msm8974 \
     memtrack.msm8974 \
-    liboverlay
+    libqdutils \
+    libqdMetaData
 
 PRODUCT_AAPT_CONFIG := normal
 PRODUCT_AAPT_PREF_CONFIG := xxhdpi
@@ -212,6 +214,3 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/wifi/bcmdhd.cal:system/etc/wifi/bcmdhd.cal
 
 $(call inherit-product-if-exists, hardware/broadcom/wlan/bcmdhd/firmware/bcm4339/device-bcm.mk)
-
-# Call the proprietary setup
-$(call inherit-product, vendor/lge/hammerhead/device-vendor.mk)

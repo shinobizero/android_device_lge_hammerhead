@@ -11,7 +11,7 @@ persist.audio.fluence.voicecomm=true
 persist.audio.fluence.voicerec=false
 persist.audio.fluence.speaker=false
 af.fast_track_multiplier=1
-audio_hal.period_size=192
+audio.offload.disable=1
 
 # Camera
 camera.disable_zsl_mode=1

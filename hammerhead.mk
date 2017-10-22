@@ -187,6 +187,8 @@ PRODUCT_PACKAGES += \
     init.hammerhead.rc \
     init.hammerhead.usb.rc \
     init.hammerhead.power.rc \
+    init.spectrum.rc \
+    init.spectrum.sh \
     init.recovery.hammerhead.rc \
     ueventd.hammerhead.rc
 

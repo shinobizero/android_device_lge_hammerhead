@@ -1,0 +1,69 @@
+# SPECTRUM KERNEL MANAGER
+# Ramdisk file for profile based kernel management
+# Implimentation inspired by Franco's fku profiles
+
+# Initialization
+on property:sys.boot_completed=1
+   # Set default profile on first boot
+   exec u:r:init:s0 root root -- /init.spectrum.sh
+   exec u:r:su:s0 root root -- /init.spectrum.sh
+   # Enable Spectrum support
+   setprop spectrum.support 1
+   # Add kernel name
+   setprop persist.spectrum.kernel EuclideanOS
+
+# Balance (default profile) [from franco.kernel]
+on property:persist.spectrum.profile=0
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2265600
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 2265600
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 2265600
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 2265600
+    write /sys/module/cpu_boost/parameters/input_boost_freq 1190400
+    write /sys/module/cpu_boost/parameters/input_boost_ms 500
+    write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 0
+    write /sys/class/leds/lcd-backlight/max_brightness 255
+
+# Performance [from franco.kernel]
+on property:persist.spectrum.profile=1
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2265600
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 2265600
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 2265600
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 2265600
+    write /sys/module/cpu_boost/parameters/input_boost_freq 1728000
+    write /sys/module/cpu_boost/parameters/input_boost_ms 1500
+    write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 0
+    write /sys/class/leds/lcd-backlight/max_brightness 255
+
+# Battery [from franco.kernel]
+on property:persist.spectrum.profile=2
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 1190400
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 1190400
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 729600
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 729600
+    write /sys/module/cpu_boost/parameters/input_boost_freq 729600
+    write /sys/module/cpu_boost/parameters/input_boost_ms 1500
+    write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 3
+    write /sys/class/leds/lcd-backlight/max_brightness 100
+
+# Gaming [from franco.kernel]
+on property:persist.spectrum.profile=3
+    write /sys/devices/system/cpu/cpu1/online 1
+    write /sys/devices/system/cpu/cpu2/online 1
+    write /sys/devices/system/cpu/cpu3/online 1
+    write /sys/devices/system/cpu/cpu0/cpufreq/scaling_max_freq 2265600
+    write /sys/devices/system/cpu/cpu1/cpufreq/scaling_max_freq 2265600
+    write /sys/devices/system/cpu/cpu2/cpufreq/scaling_max_freq 2265600
+    write /sys/devices/system/cpu/cpu3/cpufreq/scaling_max_freq 2265600
+    write /sys/module/cpu_boost/parameters/input_boost_freq 1728000
+    write /sys/module/cpu_boost/parameters/input_boost_ms 1500
+    write /sys/class/kgsl/kgsl-3d0/max_pwrlevel 0
+    write /sys/class/leds/lcd-backlight/max_brightness 255

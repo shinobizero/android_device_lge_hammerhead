@@ -94,7 +94,7 @@ BOARD_FLASH_BLOCK_SIZE := 131072
 
 # Define kernel config for inline building
 TARGET_KERNEL_CONFIG := elementalx_defconfig
-TARGET_KERNEL_SOURCE := kernel/lge/hammerhead-elementalx
+TARGET_KERNEL_SOURCE := kernel/lge/hammerhead-ELEMENTALX
 
 BOARD_CHARGER_ENABLE_SUSPEND := true
 

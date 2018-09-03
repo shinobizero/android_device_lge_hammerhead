@@ -21,9 +21,7 @@
 
 # Kernel Inline
 TARGET_KERNEL_SOURCE := kernel/lge/hammerhead
-TARGET_KERNEL_CONFIG := unicornblood_defconfig
-TARGET_VARIANT_CONFIG := unicornblood_defconfig
-TARGET_SELINUX_CONFIG := unicornblood_defconfig
+TARGET_KERNEL_CONFIG := elementalx_defconfig
 
 PRODUCT_COPY_FILES += \
     device/lge/hammerhead/init.hammerhead.rc:root/init.hammerhead.rc \

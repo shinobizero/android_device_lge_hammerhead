@@ -22,12 +22,14 @@ TARGET_CPU_VARIANT := krait
 
 TARGET_NO_BOOTLOADER := true
 
-BOARD_KERNEL_IMAGE_NAME := zImage-dtb
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
-KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-4.8/bin
+
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=hammerhead user_debug=31 maxcpus=2 msm_watchdog_v2.enable=1
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02900000 --tags_offset 0x02700000
+BOARD_KERNEL_IMAGE_NAME := zImage-dtb
+KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-4.8/bin
+KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
 
 TOUCH_BOOST_DEBUG := false
 
@@ -45,12 +47,7 @@ BOARD_USES_ALSA_AUDIO := true
 
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
-
-ifeq ($(TARGET_PRODUCT),car_hammerhead)
-BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/hammerhead/bluetooth_car
-else
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/hammerhead/bluetooth
-endif
 
 # Wifi related defines
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
@@ -100,10 +97,9 @@ BOARD_CACHEIMAGE_PARTITION_SIZE := 734003200
 BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072
 
-
-ifneq ($(filter hammerhead_fp aosp_hammerhead_fp,$(TARGET_PRODUCT)),)
-BOARD_HAS_FINGERPRINT_FPC := true
-endif
+# Define kernel config for inline building
+TARGET_KERNEL_CONFIG := elementalx_defconfig
+TARGET_KERNEL_SOURCE := kernel/lge/hammerhead-ELEMENTALX
 
 BOARD_CHARGER_ENABLE_SUSPEND := true
 
@@ -115,17 +111,6 @@ BOARD_HAL_STATIC_LIBRARIES := libdumpstate.hammerhead
 
 BOARD_SEPOLICY_DIRS += device/lge/hammerhead/sepolicy
 
-ifneq ($(filter hammerhead_fp aosp_hammerhead_fp,$(TARGET_PRODUCT)),)
-BOARD_SEPOLICY_DIRS += \
-       device/lge/hammerhead/sepolicy-hammerhead_fp
-
-# The list below is order dependent
-BOARD_SEPOLICY_UNION += \
-       device.te \
-       system_server.te \
-       file_contexts
-endif
-
 HAVE_ADRENO_SOURCE:= false
 
 OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
@@ -136,11 +121,10 @@ TARGET_TOUCHBOOST_FREQUENCY:= 1200
 
 USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY:= true
 USE_DEVICE_SPECIFIC_CAMERA:= true
-TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS:= true
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+BOARD_GLOBAL_CFLAGS += -DMETADATA_CAMERA_SOURCE
 
-ifeq ($(USE_SVELTE_KERNEL),true)
-MALLOC_IMPL := dlmalloc
-endif
+TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS:= true
 
 -include vendor/lge/hammerhead/BoardConfigVendor.mk
 
@@ -152,7 +136,3 @@ BOARD_SUPPRESS_SECURE_ERASE := true
 
 # Include an expanded selection of fonts
 EXTENDED_FONT_FOOTPRINT := true
-
-# Old camera HAL 1
-TARGET_HAS_LEGACY_CAMERA_HAL1 := true
-BOARD_GLOBAL_CFLAGS += -DMETADATA_CAMERA_SOURCE

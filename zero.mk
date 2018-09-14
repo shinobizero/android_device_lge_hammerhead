@@ -1,9 +1,7 @@
 ZERO_PRODUCT_DEVICE ?= hammerhead
 
-$(call inherit-product, vendor/zero/products/zero_hammerhead.mk)
-
 # Inherit some common ZeroROM stuff.
-$(call inherit-product, vendor/zero/configs/phone.mk)
+$(call inherit-product, vendor/zero/config/phone.mk)
 
 # BOOTANIMATION
 PRODUCT_COPY_FILES += \

@@ -49,7 +49,8 @@ PRODUCT_COPY_FILES += \
     vendor/zero/prebuilt/xbin/wesside-ng:system/xbin/wesside-ng \
     vendor/zero/prebuilt/xbin/wpaclean:system/xbin/wpaclean \
     vendor/zero/prebuilt/xbin/monstart-nh:system/xbin/monstart-nh \
-    vendor/zero/prebuilt/xbin/monstop-nh:system/xbin/monstop-nh
+    vendor/zero/prebuilt/xbin/monstop-nh:system/xbin/monstop-nh \
+    vendor/zero/prebuilt/xbin/nh-tools:system/xbin/nh-tools
 
 # Inherit device configuration
 $(call inherit-product, device/lge/hammerhead/full_hammerhead.mk)

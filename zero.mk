@@ -3,10 +3,6 @@ ZERO_PRODUCT_DEVICE ?= hammerhead
 # Inherit some common ZeroROM stuff.
 $(call inherit-product, vendor/zero/config/phone.mk)
 
-# BOOTANIMATION
-PRODUCT_COPY_FILES += \
-    vendor/zero/prebuilt/media/1080-bootanimation.zip:system/media/bootanimation.zip
-
 # ElementalX-specific init file
 PRODUCT_COPY_FILES += \
     kernel/lge/hammerhead-ELEMENTALX/init.elementalx.rc:root/init.elementalx.rc

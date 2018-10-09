@@ -14,38 +14,60 @@
 # limitations under the License.
 #
 
+
+# Platform
+TARGET_BOARD_PLATFORM := msm8974
+
+# Architecture
 TARGET_CPU_ABI := armeabi-v7a
 TARGET_CPU_ABI2 := armeabi
 TARGET_ARCH := arm
 TARGET_ARCH_VARIANT := armv7-a-neon
 TARGET_CPU_VARIANT := krait
 
-TARGET_NO_BOOTLOADER := true
+# Assertions
+TARGET_BOARD_INFO_FILE := device/lge/hammerhead/board-info.txt
 
+# Bootloader
+TARGET_BOOTLOADER_BOARD_NAME := hammerhead
+TARGET_NO_BOOTLOADER := true
+TARGET_NO_RADIOIMAGE := true
+
+# Kernel
 BOARD_KERNEL_BASE := 0x00000000
 BOARD_KERNEL_PAGESIZE := 2048
-
 BOARD_KERNEL_CMDLINE := console=ttyHSL0,115200,n8 androidboot.hardware=hammerhead user_debug=31 maxcpus=2 msm_watchdog_v2.enable=1 androidboot.bootdevice=msm_sdcc.1
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02900000 --tags_offset 0x02700000
 BOARD_KERNEL_IMAGE_NAME := zImage-dtb
 KERNEL_TOOLCHAIN := $(ANDROID_BUILD_TOP)/prebuilts/gcc/$(HOST_OS)-x86/arm/arm-eabi-4.8/bin
 KERNEL_TOOLCHAIN_PREFIX := arm-eabi-
 
-# Shader cache config options
-# Maximum size of the  GLES Shaders that can be cached for reuse.
-# Increase the size if shaders of size greater than 12KB are used.
-MAX_EGL_CACHE_KEY_SIZE := 12*1024
-
-# Maximum GLES shader cache size for each app to store the compiled shader
-# binaries. Decrease the size if RAM or Flash Storage size is a limitation
-# of the device.
-MAX_EGL_CACHE_SIZE := 2048*1024
-
+# Audio
 BOARD_USES_ALSA_AUDIO := true
 
+# Bluetooth
 BOARD_HAVE_BLUETOOTH := true
 BOARD_HAVE_BLUETOOTH_BCM := true
 BOARD_BLUETOOTH_BDROID_BUILDCFG_INCLUDE_DIR := device/lge/hammerhead/bluetooth
+
+# Camera
+USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY:= true
+USE_DEVICE_SPECIFIC_CAMERA := true
+TARGET_HAS_LEGACY_CAMERA_HAL1 := true
+
+# Charger
+BOARD_CHARGER_ENABLE_SUSPEND := true
+
+# Display
+VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
+SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
+TARGET_USES_ION := true
+OVERRIDE_RS_DRIVER := libRSDriver_adreno.so
+TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
+MAX_EGL_CACHE_KEY_SIZE := 12*1024
+MAX_EGL_CACHE_SIZE := 2048*1024
+TARGET_HAS_HH_VSYNC_ISSUE := true
+TARGET_TOUCHBOOST_FREQUENCY:= 1200
 
 # Wifi related defines
 WPA_SUPPLICANT_VERSION      := VER_0_8_X
@@ -60,17 +82,10 @@ WIFI_DRIVER_FW_PATH_STA     := "/vendor/firmware/fw_bcmdhd.bin"
 
 BOARD_USES_SECURE_SERVICES := true
 
-TARGET_NO_RADIOIMAGE := true
-TARGET_BOARD_PLATFORM := msm8974
-TARGET_BOOTLOADER_BOARD_NAME := hammerhead
-TARGET_BOARD_INFO_FILE := device/lge/hammerhead/board-info.txt
+# GPS
 BOARD_VENDOR_QCOM_GPS_LOC_API_HARDWARE := $(TARGET_BOARD_PLATFORM)
 BOARD_VENDOR_QCOM_LOC_PDK_FEATURE_SET := true
 TARGET_NO_RPC := true
-
-VSYNC_EVENT_PHASE_OFFSET_NS := 7500000
-SF_VSYNC_EVENT_PHASE_OFFSET_NS := 5000000
-TARGET_USES_ION := true
 
 # Enable dex-preoptimization to speed up first boot sequence
 ifeq ($(HOST_OS),linux)
@@ -82,44 +97,34 @@ ifeq ($(HOST_OS),linux)
 endif
 DONT_DEXPREOPT_PREBUILTS := true
 
-TARGET_USERIMAGES_USE_EXT4 := true
-TARGET_USERIMAGES_USE_F2FS := true
 BOARD_BOOTIMAGE_PARTITION_SIZE := 23068672
+BOARD_CACHEIMAGE_PARTITION_SIZE := 734003200
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_RECOVERYIMAGE_PARTITION_SIZE := 23068672
 BOARD_SYSTEMIMAGE_PARTITION_SIZE := 1073741824
 BOARD_USERDATAIMAGE_PARTITION_SIZE := 13725837312
-BOARD_CACHEIMAGE_PARTITION_SIZE := 734003200
-BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
 BOARD_FLASH_BLOCK_SIZE := 131072
+
+# Quirks
+TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS:= true
+
+# Recovery
+TARGET_RECOVERY_FSTAB = device/lge/hammerhead/rootdir/etc/fstab.hammerhead
+TARGET_RELEASETOOLS_EXTENSIONS := device/lge/hammerhead/recovery
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
 
 # Define kernel config for inline building
 TARGET_KERNEL_CONFIG := elementalx_defconfig
 TARGET_KERNEL_SOURCE := kernel/lge/hammerhead-ELEMENTALX
 
-BOARD_CHARGER_ENABLE_SUSPEND := true
-
-TARGET_RECOVERY_FSTAB = device/lge/hammerhead/fstab.hammerhead
-
-TARGET_RELEASETOOLS_EXTENSIONS := device/lge/hammerhead
-
 BOARD_HAL_STATIC_LIBRARIES := libdumpstate.hammerhead
-
-BOARD_SEPOLICY_DIRS += device/lge/hammerhead/sepolicy
-
-OVERRIDE_RS_DRIVER:= libRSDriver_adreno.so
-TARGET_FORCE_HWC_FOR_VIRTUAL_DISPLAYS := true
-TARGET_HAS_HH_VSYNC_ISSUE := true
-
-TARGET_TOUCHBOOST_FREQUENCY:= 1200
-
-USE_DEVICE_SPECIFIC_QCOM_PROPRIETARY:= true
-USE_DEVICE_SPECIFIC_CAMERA:= true
-TARGET_HAS_LEGACY_CAMERA_HAL1 := true
-
-TARGET_NEEDS_PLATFORM_TEXT_RELOCATIONS:= true
 
 # Hardware
 BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS := hardware/cyanogen/cmhw
+
+# SELinux
+BOARD_SEPOLICY_DIRS += device/lge/hammerhead/sepolicy
 
 -include vendor/lge/hammerhead/BoardConfigVendor.mk

@@ -12,13 +12,13 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Include telephony configuration
+ZERO_PRODUCT_DEVICE ?= hammerhead
+
+# Include ZeroROM Vendor Configuration
 include vendor/zero/configs/phone.mk
 
 # Inherit from the common Open Source product configuration
 $(call inherit-product, $(SRC_TARGET_DIR)/product/aosp_base_telephony.mk)
-
-ZERO_PRODUCT_DEVICE ?= hammerhead
 
 # Override AOSP build properties
 PRODUCT_NAME := zero_hammerhead
@@ -27,6 +27,9 @@ PRODUCT_DEVICE := hammerhead
 PRODUCT_MODEL := Nexus 5
 PRODUCT_MANUFACTURER := LGE
 PRODUCT_RESTRICT_VENDOR_FILES := false
+
+# Inherit device configuration
+$(call inherit-product, device/lge/hammerhead/hammerhead.mk)
 
 # Device Fingerprint
 PRODUCT_BUILD_PROP_OVERRIDES += \
